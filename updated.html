@@ -3,234 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Initiatives Merch Routing Prototype</title>
-    <!-- Load Tailwind CSS -->
+    <title>Deep Initiatives Merch Logistics Flow</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Custom styles for visualization arrows and nodes */
+        .flow-node {
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .flow-node:hover {
+            transform: translateY(-5px);
+        }
+
+        .flow-arrow {
+            /* Basic dotted line for order flow */
+            border-top: 3px dashed #10b981; /* Emerald-500 */
+            width: 100%;
+            height: 0;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+
+        .flow-arrow.solid {
+            /* Solid line for physical distribution */
+            border-top: 4px solid #3b82f6; /* Blue-500 */
+        }
+
+        /* Responsive adjustments for flow-arrow */
+        @media (min-width: 768px) {
+            .flow-arrow-vertical {
+                width: 0;
+                height: 100%;
+                border-left: 3px dashed #10b981;
+                margin: 0 2rem;
+            }
+            .flow-arrow-vertical.solid {
+                border-left: 4px solid #3b82f6;
+            }
+        }
+
+        /* Font setup */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7f7f9;
-        }
-        /* Custom styling for the dynamic message */
-        .fulfillment-message {
-            transition: all 0.3s ease-in-out;
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .loading-ring {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #10b981; /* Tailwind emerald-500 */
-            border-radius: 50%;
-            width: 1rem;
-            height: 1rem;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            background-color: #f7fafc;
         }
     </style>
 </head>
-<body class="min-h-screen p-4 sm:p-8">
+<body>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-blue': '#1a3a61',
+                        'deep-green': '#10b981',
+                        'deep-purple': '#8b5cf6',
+                    }
+                }
+            }
+        }
+    </script>
 
-    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 lg:p-10">
-        <!-- Header -->
-        <header class="mb-8 border-b pb-4">
-            <h1 class="text-3xl font-bold text-gray-800">Deep Initiatives Merch Store Prototype</h1>
-            <p class="text-sm text-gray-500 mt-1">Simulating Central Routing Logic & Transparent UX</p>
+    <div class="min-h-screen p-6 md:p-12">
+        <header class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-deep-blue">
+                Deep Initiatives Merch Logistics Flow
+            </h1>
+            <p class="text-xl mt-2 text-gray-600">Central Management + Decentralized Fulfillment (The 'Prime' Model)</p>
         </header>
 
-        <!-- Product Card and Geolocation Input -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Product Display Area (Simulation) -->
-            <div class="lg:col-span-1 border rounded-lg p-4 bg-gray-50">
-                <img src="https://placehold.co/400x400/10b981/ffffff?text=Deep+Tee" alt="Merch Product Placeholder" class="w-full rounded-md shadow-md">
-                <h2 class="text-xl font-semibold mt-4">Core Universal T-Shirt</h2>
-                <div class="flex justify-between items-center mt-2">
-                    <p class="text-2xl font-bold text-gray-900">$29.99</p>
-                    <!-- Global Standard Badge (UX A.1) -->
-                    <button id="global-badge" class="flex items-center space-x-1 px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full hover:bg-blue-200 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                        </svg>
-                        <span>Global Standard</span>
-                    </button>
+        <main class="max-w-6xl mx-auto">
+            <!-- 1. Central Management Layer -->
+            <div class="flow-node bg-deep-blue text-white mb-8">
+                <div class="w-full">
+                    <div class="text-3xl font-bold">Deep Initiatives Central HQ</div>
+                    <p class="text-sm mt-1 font-light">
+                        (Platform, Product Design, QC, Billing, Global Routing Logic)
+                    </p>
                 </div>
             </div>
 
-            <!-- Checkout and Routing Simulation -->
-            <div class="lg:col-span-2">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">Checkout Simulation</h2>
+            <!-- Arrow: Order Flow (Digital) -->
+            <div class="flex items-center justify-center">
+                <div class="h-10 w-1 bg-deep-green rounded-full flex items-center justify-center relative">
+                    <span class="absolute top-1/2 -mt-2 -ml-5 text-deep-green font-semibold transform -translate-x-full">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </span>
+                </div>
+            </div>
+            <p class="text-center text-deep-green font-semibold mt-4 mb-4">
+                Order Placed, Routed & Digital Assets Sent
+            </p>
 
-                <!-- 1. Country Input (Simulates Address Geocoding) -->
-                <label for="country-input" class="block text-sm font-medium text-gray-700 mb-2">
-                    Enter Shipping Country (Type 'Brazil', 'UK', or 'Australia'):
-                </label>
-                <input type="text" id="country-input" placeholder="e.g., Brazil" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 mb-6" list="countries">
-                <datalist id="countries">
-                    <option value="United States">
-                    <option value="Canada">
-                    <option value="Mexico">
-                    <option value="Brazil">
-                    <option value="Argentina">
-                    <option value="UK">
-                    <option value="Germany">
-                    <option value="Nigeria">
-                    <option value="South Africa">
-                    <option value="India">
-                    <option value="Japan">
-                    <option value="Australia">
-                    <option value="New Zealand">
-                </datalist>
+            <!-- 2. Community Hub Layer (Decentralized - 6 Continental Hubs) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
 
-                <!-- 2. Dynamic Fulfillment Message (UX B.1) -->
-                <div id="fulfillment-area" class="min-h-[10rem] flex items-center justify-center bg-gray-100 p-6 rounded-lg border-2 border-dashed border-gray-300">
-                    <p class="text-gray-500 italic" id="fulfillment-placeholder">
-                        Enter a country above to determine your fulfillment hub...
-                    </p>
-                    <div id="fulfillment-message" class="hidden fulfillment-message">
-                        <!-- Content will be injected here -->
+                <!-- Row 1, Col 1: Europe -->
+                <div class="bg-white border-4 border-deep-purple shadow-xl">
+                    <div class="flow-node">
+                        <div class="w-full">
+                            <h3 class="text-xl font-bold text-deep-purple">EUROPE Hub (CHPP)</h3>
+                            <p class="text-sm text-gray-500">Local Print & Fulfillment</p>
+                            <span class="text-xs font-mono bg-deep-purple text-white px-2 py-0.5 rounded-full mt-2 inline-block">Order Routed</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 3. Predictive Shipping Date (UX B.2) -->
-                <div class="mt-4 p-4 bg-emerald-50 rounded-lg border border-emerald-200">
-                    <p class="text-sm font-medium text-emerald-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-2 align-text-bottom" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-8a1 1 0 102 0V7a1 1 0 10-2 0v3zM8 12a1 1 0 100 2h4a1 1 0 100-2H8z" clip-rule="evenodd" />
-                        </svg>
-                        Estimated Local Delivery: <span class="font-bold">5-7 Business Days</span> from order date.
-                    </p>
+                <!-- Row 1, Col 2: North America -->
+                <div class="bg-white border-4 border-deep-purple shadow-xl">
+                    <div class="flow-node">
+                        <div class="w-full">
+                            <h3 class="text-xl font-bold text-deep-purple">N. AMERICA Hub (CHPP)</h3>
+                            <p class="text-sm text-gray-500">Local Print & Fulfillment</p>
+                            <span class="text-xs font-mono bg-deep-purple text-white px-2 py-0.5 rounded-full mt-2 inline-block">Order Routed</span>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- 4. Customs and Duties Assurance (UX B.3) -->
-                <div class="mt-4 p-3 bg-indigo-50 rounded-lg border border-indigo-200">
-                    <p class="text-sm text-indigo-800 font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline mr-1 align-text-bottom" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                        **Zero Customs Guarantee:** Because your order is fulfilled locally, there are **no customs fees or duties** upon delivery.
-                    </p>
+                <!-- Row 1, Col 3: Asia -->
+                <div class="bg-white border-4 border-deep-purple shadow-xl">
+                    <div class="flow-node">
+                        <div class="w-full">
+                            <h3 class="text-xl font-bold text-deep-purple">ASIA Hub (CHPP)</h3>
+                            <p class="text-sm text-gray-500">Local Print & Fulfillment</p>
+                            <span class="text-xs font-mono bg-deep-purple text-white px-2 py-0.5 rounded-full mt-2 inline-block">Order Routed</span>
+                        </div>
+                    </div>
                 </div>
 
-                <button class="w-full mt-6 px-6 py-3 bg-emerald-600 text-white font-bold text-lg rounded-lg shadow-lg hover:bg-emerald-700 transition">
-                    Proceed to Payment
-                </button>
+                <!-- Row 2, Col 1: Africa (New Location) -->
+                <div class="bg-white border-4 border-deep-purple shadow-xl">
+                    <div class="flow-node">
+                        <div class="w-full">
+                            <h3 class="text-xl font-bold text-deep-purple">AFRICA Hub (CHPP)</h3>
+                            <p class="text-sm text-gray-500">
+                                **e.g., Ghana / Nigeria**
+                            </p>
+                            <span class="text-xs font-mono bg-deep-purple text-white px-2 py-0.5 rounded-full mt-2 inline-block">Order Routed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2, Col 2: South America (New Location) -->
+                <div class="bg-white border-4 border-deep-purple shadow-xl">
+                    <div class="flow-node">
+                        <div class="w-full">
+                            <h3 class="text-xl font-bold text-deep-purple">S. AMERICA Hub (CHPP)</h3>
+                            <p class="text-sm text-gray-500">
+                                **e.g., Brazil**
+                            </p>
+                            <span class="text-xs font-mono bg-deep-purple text-white px-2 py-0.5 rounded-full mt-2 inline-block">Order Routed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2, Col 3: Oceania -->
+                <div class="bg-white border-4 border-deep-purple shadow-xl">
+                    <div class="flow-node">
+                        <div class="w-full">
+                            <h3 class="text-xl font-bold text-deep-purple">OCEANIA Hub (CHPP)</h3>
+                            <p class="text-sm text-gray-500">Local Print & Fulfillment</p>
+                            <span class="text-xs font-mono bg-deep-purple text-white px-2 py-0.5 rounded-full mt-2 inline-block">Order Routed</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
+
+            <!-- Arrow: Fulfillment Flow (Physical) -->
+            <div class="flex justify-center mt-8 mb-4">
+                <div class="flow-arrow solid w-1/3 mx-auto"></div>
+            </div>
+            <p class="text-center text-blue-600 font-semibold mb-8">
+                Physical Merch Distributed Locally (Fast, Low Cost)
+            </p>
+
+            <!-- 3. Final Mile Delivery -->
+            <div class="flex justify-center">
+                <div class="flow-node bg-blue-600 text-white w-full max-w-sm">
+                    <div class="w-full">
+                        <div class="text-2xl font-bold">End Customer / Winner</div>
+                        <p class="text-sm mt-1 font-light">
+                            Received via Local Carrier (No International Shipping)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="text-center text-sm text-gray-500 mt-12 pt-6 border-t border-gray-200">
+            <p>CHPP = Community Hub Print Partner. Orders are routed based on proximity to minimize delivery time and cost. **Now featuring six continental hubs.**</p>
+        </footer>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const countryInput = document.getElementById('country-input');
-            const fulfillmentArea = document.getElementById('fulfillment-area');
-            const placeholder = document.getElementById('fulfillment-placeholder');
-            const messageContainer = document.getElementById('fulfillment-message');
-
-            /**
-             * Simulated Country-to-Hub Geocoding/Routing Logic.
-             * In the real application, this would be an API call to the Central Routing Engine.
-             * This function simulates that engine by mapping countries to the 6 CHPPs.
-             */
-            const HUB_MAP = {
-                'NORTH_AMERICA': { hub: 'North America Hub', location: 'USA/California' },
-                'S_AMERICA': { hub: 'S. America Hub', location: 'Brazil' },
-                'EUROPE': { hub: 'Europe Hub', location: 'Netherlands' },
-                'AFRICA': { hub: 'Africa Hub', location: 'Nigeria/Ghana' },
-                'ASIA': { hub: 'Asia Hub', location: 'Singapore' },
-                'OCEANIA': { hub: 'Oceania Hub', location: 'Australia' }
-            };
-
-            const getFulfillmentHub = (country) => {
-                const normalizedCountry = country.toLowerCase().trim();
-
-                // N. America Hub
-                if (['united states', 'usa', 'canada', 'mexico'].includes(normalizedCountry)) {
-                    return HUB_MAP.NORTH_AMERICA;
-                }
-                // S. America Hub (Brazil)
-                if (['brazil', 'argentina', 'colombia', 'chile'].includes(normalizedCountry)) {
-                    return HUB_MAP.S_AMERICA;
-                }
-                // Europe Hub
-                if (['uk', 'united kingdom', 'germany', 'france', 'italy', 'netherlands'].includes(normalizedCountry)) {
-                    return HUB_MAP.EUROPE;
-                }
-                // Africa Hub (Nigeria/Ghana)
-                if (['nigeria', 'south africa', 'egypt', 'ghana'].includes(normalizedCountry)) {
-                    return HUB_MAP.AFRICA;
-                }
-                // Asia Hub
-                if (['india', 'japan', 'china', 'singapore', 'korea'].includes(normalizedCountry)) {
-                    return HUB_MAP.ASIA;
-                }
-                // Oceania Hub (Australia)
-                if (['australia', 'new zealand'].includes(normalizedCountry)) {
-                    return HUB_MAP.OCEANIA;
-                }
-
-                // Default fall-back for unmapped countries or Antarctica
-                return { hub: 'Global Contingency Hub', location: 'Germany/US' };
-            };
-
-            const displayFulfillment = (hubData) => {
-                messageContainer.classList.add('hidden');
-                placeholder.classList.add('hidden');
-                fulfillmentArea.classList.remove('border-dashed', 'border-gray-300');
-                fulfillmentArea.classList.add('bg-emerald-100', 'border-emerald-500', 'border-2');
-
-                // Build the fulfillment message (UX B.1)
-                messageContainer.innerHTML = `
-                    <p class="text-xl font-bold text-gray-900 flex items-center mb-2">
-                        <span class="text-3xl mr-2">⚡</span> Fulfillment Zone Identified
-                    </p>
-                    <p class="text-base text-gray-700">
-                        To ensure the **fastest, lowest-emissions delivery**, this order will be produced and shipped locally by our
-                        <span class="font-extrabold text-emerald-800">${hubData.hub}</span>, located near **${hubData.location}**.
-                    </p>
-                    <p class="text-sm text-gray-500 mt-2 italic">
-                        This is part of our commitment to global speed and local quality control.
-                    </p>
-                `;
-                messageContainer.classList.remove('hidden');
-            };
-
-            const handleInput = () => {
-                const country = countryInput.value;
-
-                if (country.trim().length > 2) {
-                    // Show a quick loading state to simulate API delay
-                    placeholder.innerHTML = `<div class="loading-ring mr-2"></div> Calculating optimal route...`;
-                    placeholder.classList.remove('hidden');
-                    messageContainer.classList.add('hidden');
-                    fulfillmentArea.classList.remove('bg-emerald-100', 'border-emerald-500', 'border-2');
-                    fulfillmentArea.classList.add('border-dashed', 'border-gray-300');
-
-
-                    // Simulate API delay (200ms)
-                    setTimeout(() => {
-                        const hubData = getFulfillmentHub(country);
-                        displayFulfillment(hubData);
-                    }, 200);
-
-                } else {
-                    // Reset to initial state
-                    messageContainer.classList.add('hidden');
-                    placeholder.innerHTML = `Enter a country above to determine your fulfillment hub...`;
-                    placeholder.classList.remove('hidden');
-                    fulfillmentArea.classList.remove('bg-emerald-100', 'border-emerald-500', 'border-2');
-                    fulfillmentArea.classList.add('border-dashed', 'border-gray-300');
-                }
-            };
-
-            // Event Listener for input
-            countryInput.addEventListener('input', handleInput);
-
-            // Global Badge Modal Simulation
-            document.getElementById('global-badge').addEventListener('click', () => {
-                alert("Global Standard Badge: This feature ensures consistent quality. All items meet the Global Blank Specification and use mandated Pantone Color Codes, regardless of which continental hub fulfills your order.");
-            });
-        });
-    </script>
 </body>
 </html>
